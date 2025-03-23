@@ -3,55 +3,10 @@
   "buildCommand": "node vercel-build.mjs",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
-      ]
-    },
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*).json",
-      "headers": [
-        { "key": "Content-Type", "value": "application/json" }
-      ]
-    }
-  ],
   "rewrites": [
-    { "source": "/api", "destination": "/api/index.js" },
-    { "source": "/api/", "destination": "/api/index.js" },
-    { "source": "/api/verify", "destination": "/api/verify.js" },
-    { "source": "/api/healthcheck", "destination": "/api/server.js" },
-    { "source": "/api/user", "destination": "/api/server.js" },
-    { "source": "/api/login", "destination": "/api/server.js" },
-    { "source": "/api/logout", "destination": "/api/server.js" },
-    { "source": "/api/register", "destination": "/api/server.js" },
-    { "source": "/api/trades", "destination": "/api/server.js" },
-    { "source": "/api/trades/:path*", "destination": "/api/server.js" },
-    { "source": "/api/journal", "destination": "/api/server.js" },
-    { "source": "/api/journal/:path*", "destination": "/api/server.js" },
-    { "source": "/api/metrics", "destination": "/api/server.js" },
-    { "source": "/api/:path*", "destination": "/api/fallback.js" },
-    
-    { "source": "/auth", "destination": "/index.html" },
-    { "source": "/dashboard", "destination": "/index.html" },
-    { "source": "/trades", "destination": "/index.html" },
-    { "source": "/journal", "destination": "/index.html" },
-    { "source": "/analytics", "destination": "/index.html" },
-    { "source": "/calendar", "destination": "/index.html" },
-    { "source": "/settings", "destination": "/index.html" },
+    { "source": "/api/(.*)", "destination": "/api/server.js" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "trailingSlash": false,
-  "cleanUrls": true,
   "env": {
     "NODE_ENV": "production"
   }
