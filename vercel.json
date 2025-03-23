@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
+    { "source": "/api/verify", "destination": "/api/verify" },
     { "source": "/api/healthcheck", "destination": "/api/server" },
     { "source": "/api/user", "destination": "/api/server" },
     { "source": "/api/login", "destination": "/api/server" },
