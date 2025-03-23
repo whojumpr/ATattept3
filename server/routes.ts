@@ -7,6 +7,10 @@ import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // For Vercel serverless environment
+  app.get("/api/healthcheck", (req, res) => {
+    res.status(200).json({ status: "ok", environment: process.env.NODE_ENV });
+  });
   // Set up authentication routes
   setupAuth(app);
 
