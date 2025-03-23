@@ -2,8 +2,6 @@
 // Using ES modules syntax for Vercel compatibility
 import { execSync } from 'child_process';
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 // Determine if we're running in Vercel environment
 const isVercel = process.env.VERCEL === '1';
@@ -14,9 +12,6 @@ try {
   // Display environment information
   console.log('Node version:', process.version);
   console.log('Current directory:', process.cwd());
-  console.log('Environment variables:', Object.keys(process.env).filter(key => 
-    !key.includes('SECRET') && !key.includes('TOKEN') && !key.includes('PASSWORD')
-  ));
   
   // If we're in a local environment and not Vercel, run the normal build command
   if (!isVercel) {
@@ -32,13 +27,13 @@ try {
   // List directory contents to debug
   console.log('Directory contents:', fs.readdirSync('.'));
   
-  // Build the frontend with Vite
+  // Build the frontend with Vite - Avoiding 'npx' to prevent package resolution issues
   console.log('Building frontend with Vite...');
-  execSync('npx vite build', { stdio: 'inherit' });
+  execSync('vite build', { stdio: 'inherit' });
   
   console.log('Frontend build completed.');
   
-  // Do NOT build server/index.ts to avoid external dependency issues
+  // Using serverless API routes 
   console.log('Using serverless API routes instead of building server/index.ts');
   
   // Ensure the API files are executable
