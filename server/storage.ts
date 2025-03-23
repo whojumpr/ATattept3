@@ -67,7 +67,7 @@ export class MemStorage implements IStorage {
     // Create a demo user for testing
     this.createUser({
       username: "demo",
-      password: "68b41a9e96e541eeb33647c2aa1e6426a10e7c5be16edd1b04510bfee31d486949404bb1351a039b946eb1e76420e222e86e2cce2d71cfa7dd78d25d22aef7ef.a9ddf8ccceb49af2",  // password: "password"
+      password: "6cdd1f504f9976cd550eb2e03de5d1d4c19340a9256dba002dc1f2a2d376b7da5c23c95ab9c3e6c8b3eef49ab2247bea1d0047de0c4baadc8174ae32a48e8367.0abd7b029c753fea324cf8897c6a29a0", // password: "demo"
       name: "Demo User",
       email: "demo@example.com"
     });
