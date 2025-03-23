@@ -25,37 +25,33 @@
       ]
     }
   ],
-  "routes": [
-    { "src": "/api", "dest": "/api/index.js" },
-    { "src": "/api/", "dest": "/api/index.js" },
-    { "src": "/api/verify", "dest": "/api/verify.js" },
-    { "src": "/api/healthcheck", "dest": "/api/server.js" },
-    { "src": "/api/user", "dest": "/api/server.js" },
-    { "src": "/api/login", "dest": "/api/server.js" },
-    { "src": "/api/logout", "dest": "/api/server.js" },
-    { "src": "/api/register", "dest": "/api/server.js" },
-    { "src": "/api/trades", "dest": "/api/server.js" },
-    { "src": "/api/trades/(.*)", "dest": "/api/server.js" },
-    { "src": "/api/journal", "dest": "/api/server.js" },
-    { "src": "/api/journal/(.*)", "dest": "/api/server.js" },
-    { "src": "/api/metrics", "dest": "/api/server.js" },
-    { "src": "/api/(.*)", "dest": "/api/fallback.js" },
+  "rewrites": [
+    { "source": "/api", "destination": "/api/index.js" },
+    { "source": "/api/", "destination": "/api/index.js" },
+    { "source": "/api/verify", "destination": "/api/verify.js" },
+    { "source": "/api/healthcheck", "destination": "/api/server.js" },
+    { "source": "/api/user", "destination": "/api/server.js" },
+    { "source": "/api/login", "destination": "/api/server.js" },
+    { "source": "/api/logout", "destination": "/api/server.js" },
+    { "source": "/api/register", "destination": "/api/server.js" },
+    { "source": "/api/trades", "destination": "/api/server.js" },
+    { "source": "/api/trades/:path*", "destination": "/api/server.js" },
+    { "source": "/api/journal", "destination": "/api/server.js" },
+    { "source": "/api/journal/:path*", "destination": "/api/server.js" },
+    { "source": "/api/metrics", "destination": "/api/server.js" },
+    { "source": "/api/:path*", "destination": "/api/fallback.js" },
     
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/_next/(.*)", "dest": "/_next/$1" },
-    
-    { "handle": "filesystem" },
-    
-    { "src": "/auth", "dest": "/index.html" },
-    { "src": "/dashboard", "dest": "/index.html" },
-    { "src": "/trades", "dest": "/index.html" },
-    { "src": "/journal", "dest": "/index.html" },
-    { "src": "/analytics", "dest": "/index.html" },
-    { "src": "/calendar", "dest": "/index.html" },
-    { "src": "/settings", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/index.html", "status": 200 }
+    { "source": "/auth", "destination": "/index.html" },
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/trades", "destination": "/index.html" },
+    { "source": "/journal", "destination": "/index.html" },
+    { "source": "/analytics", "destination": "/index.html" },
+    { "source": "/calendar", "destination": "/index.html" },
+    { "source": "/settings", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
+  "trailingSlash": false,
+  "cleanUrls": true,
   "env": {
     "NODE_ENV": "production"
   }
