@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DatePicker } from "@/components/ui/date-picker";
 
@@ -97,6 +97,9 @@ export function JournalEntryForm({ isOpen, onClose, editEntry }: JournalEntryFor
           <DialogTitle>
             {editEntry ? "Edit Journal Entry" : "Add New Journal Entry"}
           </DialogTitle>
+          <DialogDescription>
+            {editEntry ? "Update the details of your journal entry." : "Record your trading thoughts and reflections."}
+          </DialogDescription>
         </DialogHeader>
         
         <Form {...form}>
