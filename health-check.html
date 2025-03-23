@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaJournal - Deployment Health Check</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 { 
+      color: #12b76a; 
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 {
+      font-size: 1.6rem;
+      margin-top: 2rem;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 0.5rem;
+    }
+    .status { 
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+    }
+    .ok { 
+      background: #d1fae5; 
+      color: #065f46; 
+    }
+    .error {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    button {
+      background: #12b76a;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #0e9355;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      overflow: auto;
+      border-radius: 4px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .flex {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .info-item {
+      flex: 1;
+      min-width: 250px;
+    }
+    .logo {
+      height: 60px;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .diagnostic-list {
+      list-style: none;
+      padding: 0;
+    }
+    .diagnostic-list li {
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+    .diagnostic-list li:nth-child(odd) {
+      background: #f5f7fa;
+    }
+    .version {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100">
+      <path d="M50,25 L80,75 L20,75 Z" fill="#12b76a"/>
+      <text x="100" y="65" font-family="Arial" font-weight="bold" font-size="40" fill="#12b76a">AlphaJournal</text>
+    </svg>
+    <div class="version">Deployment Health Check v1.0.0</div>
+    
+    <div class="status ok">
+      ✅ Static file serving is working - you can see this page!
+    </div>
+
+    <h2>Environment Information</h2>
+    <div class="flex">
+      <div class="info-item">
+        <p><strong>Build Date:</strong> <span id="build-date"></span></p>
+        <p><strong>Platform:</strong> Vercel</p>
+        <p><strong>Environment:</strong> <span id="environment"></span></p>
+      </div>
+      <div class="info-item">
+        <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+        <p><strong>Screen Size:</strong> <span id="screen-size"></span></p>
+        <p><strong>Current URL:</strong> <span id="current-url"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>API Status Check</h2>
+    <div id="api-status">Checking API connection...</div>
+    <button onclick="checkAPI()">Check API</button>
+  </div>
+
+  <div class="card">
+    <h2>Frontend Connectivity</h2>
+    <div id="frontend-status">Click the button to check if the frontend is available</div>
+    <button onclick="checkFrontend()">Check Frontend</button>
+  </div>
+
+  <div class="card">
+    <h2>Diagnostics & Troubleshooting</h2>
+    <ul class="diagnostic-list">
+      <li>If the API check fails, verify the SESSION_SECRET environment variable is set in Vercel</li>
+      <li>If the frontend check fails, try accessing the root URL directly</li>
+      <li>Check that you're using the "Other" framework preset in Vercel, not "Vite"</li>
+      <li>Ensure vercel.json has the correct configuration and build commands</li>
+    </ul>
+    <div style="margin-top: 15px;">
+      <button onclick="location.href='/'">Go to Main Application</button>
+    </div>
+  </div>
+
+  <script>
+    // Set environment info
+    document.getElementById('build-date').textContent = new Date().toISOString();
+    document.getElementById('environment').textContent = window.location.hostname.includes('localhost') ? 'Development' : 'Production';
+    document.getElementById('user-agent').textContent = navigator.userAgent;
+    document.getElementById('screen-size').textContent = `${window.innerWidth}x${window.innerHeight}`;
+    document.getElementById('current-url').textContent = window.location.href;
+
+    // API status check
+    async function checkAPI() {
+      const statusEl = document.getElementById('api-status');
+      statusEl.innerHTML = 'Checking API connection...';
+      statusEl.className = '';
+      
+      try {
+        const response = await fetch('/api/healthcheck');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        
+        if (data.status === 'ok') {
+          statusEl.innerHTML = `
+            <div class="status ok">
+              ✅ API is responsive
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+            </div>
+          `;
+        } else {
+          statusEl.innerHTML = `
+            <div class="status error">
+              ❌ API returned unexpected response
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+            </div>
+          `;
+        }
+      } catch (error) {
+        statusEl.innerHTML = `
+          <div class="status error">
+            ❌ API connection failed
+            <pre>${error.message}</pre>
+          </div>
+        `;
+      }
+    }
+    
+    // Frontend status check
+    async function checkFrontend() {
+      const statusEl = document.getElementById('frontend-status');
+      statusEl.innerHTML = 'Checking frontend availability...';
+      statusEl.className = '';
+      
+      try {
+        const response = await fetch('/');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        // Check if it's HTML (frontend) or JSON (API)
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('text/html')) {
+          statusEl.innerHTML = `
+            <div class="status ok">
+              ✅ Frontend is available
+              <p>Content-Type: ${contentType}</p>
+            </div>
+          `;
+        } else {
+          statusEl.innerHTML = `
+            <div class="status error">
+              ❌ Frontend may be misconfigured
+              <p>Content-Type: ${contentType}</p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        statusEl.innerHTML = `
+          <div class="status error">
+            ❌ Frontend check failed
+            <pre>${error.message}</pre>
+          </div>
+        `;
+      }
+    }
+    
+    // Auto-check API and frontend on page load
+    window.onload = function() {
+      setTimeout(checkAPI, 500);
+    };
+  </script>
+</body>
+</html>

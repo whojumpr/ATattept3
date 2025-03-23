@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "node vercel-build.mjs",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
+  "public": true,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/server.js" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+    { "source": "/api/(.*)", "destination": "/api/index" }
+  ]
 }
