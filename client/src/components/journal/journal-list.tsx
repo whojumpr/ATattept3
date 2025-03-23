@@ -170,7 +170,7 @@ export function JournalList() {
                   <SelectValue placeholder="Mood" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Moods</SelectItem>
+                  <SelectItem value="all">All Moods</SelectItem>
                   <SelectItem value="positive">Positive</SelectItem>
                   <SelectItem value="neutral">Neutral</SelectItem>
                   <SelectItem value="negative">Negative</SelectItem>
@@ -182,7 +182,7 @@ export function JournalList() {
                   <SelectValue placeholder="Tag" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Tags</SelectItem>
+                  <SelectItem value="all">All Tags</SelectItem>
                   {allTags.map(tag => (
                     <SelectItem key={tag} value={tag}>{tag}</SelectItem>
                   ))}

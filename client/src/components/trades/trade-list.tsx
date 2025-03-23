@@ -153,7 +153,7 @@ export function TradeList() {
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Status</SelectItem>
+                  <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="win">Win</SelectItem>
                   <SelectItem value="loss">Loss</SelectItem>
                   <SelectItem value="breakeven">Breakeven</SelectItem>
@@ -165,7 +165,7 @@ export function TradeList() {
                   <SelectValue placeholder="Instrument" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Instruments</SelectItem>
+                  <SelectItem value="all">All Instruments</SelectItem>
                   <SelectItem value="stocks">Stocks</SelectItem>
                   <SelectItem value="options">Options</SelectItem>
                   <SelectItem value="futures">Futures</SelectItem>
