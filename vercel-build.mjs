@@ -40,6 +40,19 @@ try {
   if (fs.existsSync('api')) {
     console.log('API directory exists');
     console.log('API directory contents:', fs.readdirSync('api'));
+    
+    // Copy the API files to the dist directory
+    console.log('Copying API directory to dist for Vercel deployment...');
+    if (!fs.existsSync('dist/api')) {
+      fs.mkdirSync('dist/api', { recursive: true });
+    }
+    
+    fs.readdirSync('api').forEach(file => {
+      fs.copyFileSync(`api/${file}`, `dist/api/${file}`);
+    });
+    
+    console.log('API files copied to dist directory');
+    console.log('dist/api directory contents:', fs.readdirSync('dist/api'));
   } else {
     console.error('API directory not found! This is required for Vercel deployment.');
     throw new Error('API directory not found');
