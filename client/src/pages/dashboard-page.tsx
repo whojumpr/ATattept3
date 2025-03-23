@@ -82,10 +82,10 @@ export default function DashboardPage() {
                 <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
                 <p className="text-gray-600">Welcome back, {user?.name || user?.username}! Here's your trading overview.</p>
               </div>
-              <div className="mt-4 md:mt-0 flex space-x-3">
+              <div className="mt-4 md:mt-0 flex flex-wrap gap-3">
                 <Button 
                   onClick={() => setIsTradeFormOpen(true)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white"
+                  className="bg-green-600 hover:bg-green-700 text-white"
                 >
                   <Plus className="h-5 w-5 mr-2" />
                   Add Trade
@@ -99,49 +99,51 @@ export default function DashboardPage() {
           </header>
           
           {/* Time Period Filter */}
-          <div className="mb-6 flex flex-wrap items-center">
-            <span className="mr-3 text-gray-600 font-medium">View:</span>
-            <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-              <Button 
-                variant={timeFilter === "today" ? "default" : "ghost"}
-                size="sm" 
-                onClick={() => setTimeFilter("today")}
-                className={timeFilter === "today" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
-              >
-                Today
-              </Button>
-              <Button 
-                variant={timeFilter === "week" ? "default" : "ghost"}
-                size="sm" 
-                onClick={() => setTimeFilter("week")}
-                className={timeFilter === "week" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
-              >
-                Week
-              </Button>
-              <Button 
-                variant={timeFilter === "month" ? "default" : "ghost"}
-                size="sm" 
-                onClick={() => setTimeFilter("month")}
-                className={timeFilter === "month" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
-              >
-                Month
-              </Button>
-              <Button 
-                variant={timeFilter === "year" ? "default" : "ghost"}
-                size="sm" 
-                onClick={() => setTimeFilter("year")}
-                className={timeFilter === "year" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
-              >
-                Year
-              </Button>
-              <Button 
-                variant={timeFilter === "all" ? "default" : "ghost"}
-                size="sm" 
-                onClick={() => setTimeFilter("all")}
-                className={timeFilter === "all" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
-              >
-                All Time
-              </Button>
+          <div className="mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
+              <span className="mb-2 sm:mb-0 text-gray-600 font-medium">View:</span>
+              <div className="grid grid-cols-3 sm:flex gap-1 bg-gray-100 p-1 rounded-lg w-full sm:w-auto">
+                <Button 
+                  variant={timeFilter === "today" ? "default" : "ghost"}
+                  size="sm" 
+                  onClick={() => setTimeFilter("today")}
+                  className={timeFilter === "today" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
+                >
+                  Today
+                </Button>
+                <Button 
+                  variant={timeFilter === "week" ? "default" : "ghost"}
+                  size="sm" 
+                  onClick={() => setTimeFilter("week")}
+                  className={timeFilter === "week" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
+                >
+                  Week
+                </Button>
+                <Button 
+                  variant={timeFilter === "month" ? "default" : "ghost"}
+                  size="sm" 
+                  onClick={() => setTimeFilter("month")}
+                  className={timeFilter === "month" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
+                >
+                  Month
+                </Button>
+                <Button 
+                  variant={timeFilter === "year" ? "default" : "ghost"}
+                  size="sm" 
+                  onClick={() => setTimeFilter("year")}
+                  className={timeFilter === "year" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"}
+                >
+                  Year
+                </Button>
+                <Button 
+                  variant={timeFilter === "all" ? "default" : "ghost"}
+                  size="sm" 
+                  onClick={() => setTimeFilter("all")}
+                  className={`${timeFilter === "all" ? "bg-white shadow-sm text-gray-700" : "text-gray-600"} col-span-3 sm:col-span-1`}
+                >
+                  All Time
+                </Button>
+              </div>
             </div>
           </div>
           

@@ -92,7 +92,7 @@ export function JournalEntryForm({ isOpen, onClose, editEntry }: JournalEntryFor
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>
             {editEntry ? "Edit Journal Entry" : "Add New Journal Entry"}

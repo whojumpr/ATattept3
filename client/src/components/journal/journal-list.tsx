@@ -153,8 +153,8 @@ export function JournalList() {
     <>
       <Card className="mb-6">
         <CardContent className="p-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-            <div className="relative flex-1">
+          <div className="flex flex-col gap-4 mb-6">
+            <div className="relative w-full">
               <Input
                 placeholder="Search journal entries..."
                 value={searchTerm}
@@ -164,9 +164,9 @@ export function JournalList() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             </div>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               <Select value={selectedMood} onValueChange={setSelectedMood}>
-                <SelectTrigger className="w-[140px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Mood" />
                 </SelectTrigger>
                 <SelectContent>
@@ -178,7 +178,7 @@ export function JournalList() {
               </Select>
               
               <Select value={selectedTag} onValueChange={setSelectedTag}>
-                <SelectTrigger className="w-[140px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Tag" />
                 </SelectTrigger>
                 <SelectContent>
@@ -193,14 +193,12 @@ export function JournalList() {
                 date={startDate} 
                 setDate={setStartDate} 
                 placeholder="Start Date"
-                className="w-[140px]"
               />
               
               <DatePicker 
                 date={endDate} 
                 setDate={setEndDate} 
                 placeholder="End Date"
-                className="w-[140px]"
               />
               
               <Button 
@@ -212,8 +210,9 @@ export function JournalList() {
                   setStartDate(undefined);
                   setEndDate(undefined);
                 }}
+                className="col-span-2 sm:col-span-4"
               >
-                Clear
+                Clear Filters
               </Button>
             </div>
           </div>
@@ -302,16 +301,17 @@ export function JournalList() {
       
       {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-[95vw] sm:max-w-md p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle>Confirm Deletion</DialogTitle>
           </DialogHeader>
           <p>Are you sure you want to delete this journal entry? This action cannot be undone.</p>
-          <DialogFooter>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 mt-4">
             <Button
               variant="outline"
               onClick={() => setIsDeleteDialogOpen(false)}
               disabled={deleteMutation.isPending}
+              className="w-full sm:w-auto"
             >
               Cancel
             </Button>
@@ -319,6 +319,7 @@ export function JournalList() {
               variant="destructive"
               onClick={handleDelete}
               disabled={deleteMutation.isPending}
+              className="w-full sm:w-auto"
             >
               {deleteMutation.isPending ? "Deleting..." : "Delete"}
             </Button>

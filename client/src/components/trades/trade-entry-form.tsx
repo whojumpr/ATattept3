@@ -142,7 +142,7 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[95vw] sm:max-w-4xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle>
             {editTrade ? "Edit Trade" : "Add New Trade"}
@@ -154,7 +154,7 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Left Column */}
               <div>
                 <FormField
