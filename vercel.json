@@ -1,6 +1,13 @@
 {
   "version": 2,
   "framework": "vite",
+  "buildCommand": "node vercel-build.js",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "dist/**"
+    }
+  },
   "rewrites": [
     { "source": "/api/verify", "destination": "/api/verify" },
     { "source": "/api/healthcheck", "destination": "/api/server" },
