@@ -1,3 +1,6 @@
 .git
 .env
 node_modules
+# We need the api directory for serverless functions
+# We need the shared directory for type definitions
+# Do NOT ignore the vercel-build.mjs file
