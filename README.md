@@ -25,16 +25,29 @@ A sophisticated day trading journal application designed to empower traders with
 This project is configured for seamless deployment to Vercel. Follow these steps to deploy:
 
 1. Sign up for a Vercel account at [vercel.com](https://vercel.com)
-2. Install the Vercel CLI: `npm i -g vercel`
-3. Run `vercel login` to authenticate
-4. From the project root directory, run `vercel` to deploy
-5. Follow the prompts and confirm the deployment settings
+2. Connect your GitHub repository to Vercel
+3. Use the following deployment settings:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `.` (root of the repository)
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
 
 ### Environment Variables
 
 For proper functionality, set these environment variables in your Vercel project settings:
 
+- `NODE_ENV`: Set to `production`
 - `SESSION_SECRET`: A strong random string for securing session cookies
+
+### Deployment Troubleshooting
+
+If you encounter issues during deployment:
+
+1. Ensure all environment variables are properly set in the Vercel dashboard
+2. Check Vercel's function logs for any API-related errors
+3. Verify that the build was completed successfully
+4. Make sure Vercel's routing configuration isn't blocking API requests
 
 ## Development
 

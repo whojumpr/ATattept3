@@ -7,6 +7,13 @@ import { scrypt, randomBytes, timingSafeEqual } from 'crypto';
 import { promisify } from 'util';
 import createMemoryStore from 'memorystore';
 
+// For Vercel deployments
+export const config = {
+  api: {
+    bodyParser: true
+  }
+};
+
 const MemoryStore = createMemoryStore(session);
 const app = express();
 const scryptAsync = promisify(scrypt);
@@ -41,7 +48,9 @@ app.use(session({
   }),
   cookie: {
     secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    httpOnly: true,
+    sameSite: 'lax'
   }
 }));
 
