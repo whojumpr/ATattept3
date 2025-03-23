@@ -3,19 +3,57 @@
   "buildCommand": "node vercel-build.mjs",
   "outputDirectory": "dist",
   "installCommand": "npm install",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*).json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
+    }
+  ],
   "routes": [
+    { "src": "/api", "dest": "/api/index.js" },
+    { "src": "/api/", "dest": "/api/index.js" },
     { "src": "/api/verify", "dest": "/api/verify.js" },
     { "src": "/api/healthcheck", "dest": "/api/server.js" },
     { "src": "/api/user", "dest": "/api/server.js" },
     { "src": "/api/login", "dest": "/api/server.js" },
     { "src": "/api/logout", "dest": "/api/server.js" },
     { "src": "/api/register", "dest": "/api/server.js" },
-    { "src": "/api/trades(.*)", "dest": "/api/server.js" },
-    { "src": "/api/journal(.*)", "dest": "/api/server.js" },
-    { "src": "/api/metrics(.*)", "dest": "/api/server.js" },
+    { "src": "/api/trades", "dest": "/api/server.js" },
+    { "src": "/api/trades/(.*)", "dest": "/api/server.js" },
+    { "src": "/api/journal", "dest": "/api/server.js" },
+    { "src": "/api/journal/(.*)", "dest": "/api/server.js" },
+    { "src": "/api/metrics", "dest": "/api/server.js" },
     { "src": "/api/(.*)", "dest": "/api/fallback.js" },
+    
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/_next/(.*)", "dest": "/_next/$1" },
+    
     { "handle": "filesystem" },
+    
+    { "src": "/auth", "dest": "/index.html" },
+    { "src": "/dashboard", "dest": "/index.html" },
+    { "src": "/trades", "dest": "/index.html" },
+    { "src": "/journal", "dest": "/index.html" },
+    { "src": "/analytics", "dest": "/index.html" },
+    { "src": "/calendar", "dest": "/index.html" },
+    { "src": "/settings", "dest": "/index.html" },
     { "src": "/(.*)", "dest": "/index.html", "status": 200 }
   ],
   "env": {

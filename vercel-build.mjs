@@ -81,6 +81,110 @@ try {
 </IfModule>
     `.trim());
     console.log('Created .htaccess file');
+    
+    // Add a diagnostic HTML file that can be accessed if the main app fails
+    fs.writeFileSync('dist/health-check.html', `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaJournal Health Check</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 { color: #10B981; }
+      .status { 
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+      }
+      .ok { background: #d1fae5; color: #065f46; }
+      button {
+        background: #10B981;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      pre {
+        background: #f1f5f9;
+        padding: 10px;
+        overflow: auto;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AlphaJournal Health Check</h1>
+    <div class="status ok">
+      ✅ If you can see this page, static file serving is working correctly
+    </div>
+    
+    <div id="api-status">Checking API status...</div>
+    
+    <h2>Environment Info</h2>
+    <div id="env-info">
+      <p>Build time: ${new Date().toISOString()}</p>
+      <p>Deployment: Vercel</p>
+    </div>
+    
+    <h2>Actions</h2>
+    <button onclick="location.href='/'">Go to Main Application</button>
+    <button onclick="checkAPI()">Check API</button>
+    
+    <script>
+      async function checkAPI() {
+        const statusEl = document.getElementById('api-status');
+        statusEl.innerHTML = 'Checking API connection...';
+        
+        try {
+          const response = await fetch('/api/healthcheck');
+          const data = await response.json();
+          
+          if (data.status === 'ok') {
+            statusEl.innerHTML = \`
+              <div class="status ok">
+                ✅ API is responsive
+                <pre>\${JSON.stringify(data, null, 2)}</pre>
+              </div>
+            \`;
+          } else {
+            statusEl.innerHTML = \`
+              <div class="status" style="background:#fee2e2;color:#b91c1c">
+                ❌ API returned unexpected response
+                <pre>\${JSON.stringify(data, null, 2)}</pre>
+              </div>
+            \`;
+          }
+        } catch (error) {
+          statusEl.innerHTML = \`
+            <div class="status" style="background:#fee2e2;color:#b91c1c">
+              ❌ API connection failed
+              <pre>\${error.message}</pre>
+            </div>
+          \`;
+        }
+      }
+      
+      // Auto-check API on page load
+      window.onload = checkAPI;
+    </script>
+  </body>
+</html>
+    `.trim());
+    console.log('Created health-check.html diagnostic file');
+    
+    // Create a minimal version of index.html as a fallback
+    fs.writeFileSync('dist/index-fallback.html', fs.readFileSync('client/index.html', 'utf8'));
+    console.log('Created index-fallback.html file');
   } else {
     console.error('dist directory not found after build! This is required for frontend deployment.');
     throw new Error('dist directory not found');
