@@ -39,6 +39,38 @@ async function comparePasswords(supplied, stored) {
 
 // Middleware setup
 app.use(express.json());
+
+// Add CORS middleware for development/production compatibility
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'https://atattempt3.vercel.app', 
+    'https://alphajournal.vercel.app', 
+    'https://alphajournal.app'
+  ];
+  
+  const origin = req.headers.origin;
+  
+  // In development, allow any origin
+  if (process.env.NODE_ENV !== 'production') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  } 
+  // In production, allow only specific origins
+  else if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  next();
+});
+
 app.use(session({
   secret: process.env.SESSION_SECRET || 'development-secret-key',
   resave: false,
@@ -50,7 +82,7 @@ app.use(session({
     secure: process.env.NODE_ENV === 'production',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
   }
 }));
 

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AlphaJournal - A sophisticated day trading journal for tracking performance and analyzing trades" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,10 +29,76 @@
       #root {
         min-height: 100vh;
       }
+      /* Loading state styles */
+      .app-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+        color: #374151;
+        text-align: center;
+      }
+      .app-loading h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top-color: #10B981;
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: 1rem;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      /* Error state styles */
+      #root-error {
+        display: none;
+        padding: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Initial loading state -->
+      <div class="app-loading">
+        <div class="spinner"></div>
+        <h1>Loading AlphaJournal...</h1>
+        <p>Your trading journal is being prepared</p>
+      </div>
+    </div>
+    <div id="root-error"></div>
+    
+    <script>
+      // Error handling for production
+      window.addEventListener('error', function(event) {
+        console.error('Global error caught:', event.error);
+        const rootEl = document.getElementById('root');
+        const errorEl = document.getElementById('root-error');
+        
+        if (rootEl && errorEl) {
+          errorEl.style.display = 'block';
+          errorEl.innerHTML = `
+            <h1 style="color: #EF4444; margin-bottom: 1rem;">Something went wrong</h1>
+            <p>We're having trouble loading AlphaJournal. Please try refreshing the page.</p>
+            <button onclick="window.location.reload()" 
+                    style="background: #10B981; color: white; border: none; padding: 0.5rem 1rem; 
+                           border-radius: 0.25rem; margin-top: 1rem; cursor: pointer;">
+              Refresh Page
+            </button>
+          `;
+        }
+      });
+    </script>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
