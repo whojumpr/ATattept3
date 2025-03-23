@@ -449,8 +449,8 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
                   render={({ field }) => (
                     <FormItem className="mt-4">
                       <FormLabel>Upload Screenshots</FormLabel>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                        <UploadCloud className="mx-auto h-12 w-12 text-gray-400" />
+                      <div className="border-2 border-dashed border-green-300 rounded-lg p-4 text-center">
+                        <UploadCloud className="mx-auto h-12 w-12 text-green-400" />
                         <p className="mt-1 text-sm text-gray-500">
                           Drag and drop your files here, or <span className="text-green-500">browse</span>
                         </p>

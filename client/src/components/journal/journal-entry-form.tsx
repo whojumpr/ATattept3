@@ -213,6 +213,7 @@ export function JournalEntryForm({ isOpen, onClose, editEntry }: JournalEntryFor
               <Button 
                 type="submit"
                 disabled={journalMutation.isPending}
+                className="bg-green-600 hover:bg-green-700 text-white"
               >
                 {journalMutation.isPending 
                   ? "Saving..." 

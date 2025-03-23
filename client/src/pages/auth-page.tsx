@@ -123,7 +123,11 @@ export default function AuthPage() {
                   </CardContent>
                   
                   <CardFooter>
-                    <Button type="submit" className="w-full" disabled={loginMutation.isPending}>
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-green-600 hover:bg-green-700 text-white" 
+                      disabled={loginMutation.isPending}
+                    >
                       {loginMutation.isPending ? "Logging in..." : "Login"}
                     </Button>
                   </CardFooter>
@@ -193,7 +197,11 @@ export default function AuthPage() {
                   </CardContent>
                   
                   <CardFooter>
-                    <Button type="submit" className="w-full" disabled={registerMutation.isPending}>
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-green-600 hover:bg-green-700 text-white" 
+                      disabled={registerMutation.isPending}
+                    >
                       {registerMutation.isPending ? "Creating account..." : "Register"}
                     </Button>
                   </CardFooter>
