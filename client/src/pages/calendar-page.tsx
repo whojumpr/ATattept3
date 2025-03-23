@@ -203,73 +203,75 @@ export default function CalendarPage() {
             </CardContent>
           </Card>
           
-          <TabsContent value="month" className="mt-0 p-0">
-            <TradingCalendar trades={trades} />
-          </TabsContent>
-          
-          <TabsContent value="week" className="mt-0 p-0">
-            <Card>
-              <CardHeader>
-                <CardTitle>Weekly View</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {/* Generate days for the week */}
-                  {Array.from({ length: 7 }).map((_, i) => {
-                    const day = new Date(startOfWeek(currentDate, { weekStartsOn: 1 }));
-                    day.setDate(day.getDate() + i);
-                    const dayStr = format(day, "yyyy-MM-dd");
-                    const dayTrades = trades.filter(t => 
-                      format(new Date(t.exitDate), "yyyy-MM-dd") === dayStr
-                    );
-                    const dayProfit = dayTrades.reduce((sum, t) => sum + t.profitLoss, 0);
-                    
-                    return (
-                      <div key={i} className="border-b pb-4 last:border-0">
-                        <div className="flex justify-between items-center mb-2">
-                          <h3 className="font-medium">
-                            {format(day, "EEEE, MMMM d, yyyy")}
-                          </h3>
-                          <div className={`font-medium ${dayProfit > 0 ? "text-profit" : dayProfit < 0 ? "text-loss" : ""}`}>
-                            {dayTrades.length > 0 ? formatCurrency(dayProfit) : "No trades"}
+          <Tabs value={selectedTab} onValueChange={setSelectedTab}>
+            <TabsContent value="month" className="mt-0 p-0">
+              <TradingCalendar trades={trades} />
+            </TabsContent>
+            
+            <TabsContent value="week" className="mt-0 p-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Weekly View</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {/* Generate days for the week */}
+                    {Array.from({ length: 7 }).map((_, i) => {
+                      const day = new Date(startOfWeek(currentDate, { weekStartsOn: 1 }));
+                      day.setDate(day.getDate() + i);
+                      const dayStr = format(day, "yyyy-MM-dd");
+                      const dayTrades = trades.filter(t => 
+                        format(new Date(t.exitDate), "yyyy-MM-dd") === dayStr
+                      );
+                      const dayProfit = dayTrades.reduce((sum, t) => sum + t.profitLoss, 0);
+                      
+                      return (
+                        <div key={i} className="border-b pb-4 last:border-0">
+                          <div className="flex justify-between items-center mb-2">
+                            <h3 className="font-medium">
+                              {format(day, "EEEE, MMMM d, yyyy")}
+                            </h3>
+                            <div className={`font-medium ${dayProfit > 0 ? "text-profit" : dayProfit < 0 ? "text-loss" : ""}`}>
+                              {dayTrades.length > 0 ? formatCurrency(dayProfit) : "No trades"}
+                            </div>
                           </div>
-                        </div>
-                        
-                        {dayTrades.length > 0 ? (
-                          <div className="space-y-2">
-                            {dayTrades.map(trade => (
-                              <div 
-                                key={trade.id}
-                                className={`p-3 rounded-lg text-sm ${
-                                  trade.profitLoss > 0 
-                                    ? "bg-green-50 border border-green-100" 
-                                    : "bg-red-50 border border-red-100"
-                                }`}
-                              >
-                                <div className="flex justify-between mb-1">
-                                  <div className="font-medium">{trade.symbol} ({trade.tradeType})</div>
-                                  <div className={trade.profitLoss > 0 ? "text-profit" : "text-loss"}>
-                                    {formatCurrency(trade.profitLoss)}
+                          
+                          {dayTrades.length > 0 ? (
+                            <div className="space-y-2">
+                              {dayTrades.map(trade => (
+                                <div 
+                                  key={trade.id}
+                                  className={`p-3 rounded-lg text-sm ${
+                                    trade.profitLoss > 0 
+                                      ? "bg-green-50 border border-green-100" 
+                                      : "bg-red-50 border border-red-100"
+                                  }`}
+                                >
+                                  <div className="flex justify-between mb-1">
+                                    <div className="font-medium">{trade.symbol} ({trade.tradeType})</div>
+                                    <div className={trade.profitLoss > 0 ? "text-profit" : "text-loss"}>
+                                      {formatCurrency(trade.profitLoss)}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    {format(new Date(trade.entryDate), "h:mm a")} - {format(new Date(trade.exitDate), "h:mm a")}
+                                    {" • "}
+                                    {trade.positionSize} shares at {formatCurrency(trade.entryPrice)}
                                   </div>
                                 </div>
-                                <div>
-                                  {format(new Date(trade.entryDate), "h:mm a")} - {format(new Date(trade.exitDate), "h:mm a")}
-                                  {" • "}
-                                  {trade.positionSize} shares at {formatCurrency(trade.entryPrice)}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <p className="text-sm text-gray-500 italic">No trades on this day</p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-sm text-gray-500 italic">No trades on this day</p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
