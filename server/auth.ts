@@ -28,6 +28,11 @@ async function comparePasswords(supplied: string, stored: string) {
   return timingSafeEqual(hashedBuf, suppliedBuf);
 }
 
+// Helper function to create a hashed password
+export async function createHashedPassword(plainPassword: string): Promise<string> {
+  return await hashPassword(plainPassword);
+}
+
 export function setupAuth(app: Express) {
   const sessionSettings: session.SessionOptions = {
     secret: process.env.SESSION_SECRET || "tradetrak-secret-key",

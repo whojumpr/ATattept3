@@ -63,6 +63,14 @@ export class MemStorage implements IStorage {
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000, // prune expired entries every 24h
     });
+    
+    // Create a demo user for testing
+    this.createUser({
+      username: "demo",
+      password: "68b41a9e96e541eeb33647c2aa1e6426a10e7c5be16edd1b04510bfee31d486949404bb1351a039b946eb1e76420e222e86e2cce2d71cfa7dd78d25d22aef7ef.a9ddf8ccceb49af2",  // password: "password"
+      name: "Demo User",
+      email: "demo@example.com"
+    });
   }
 
   // User methods
