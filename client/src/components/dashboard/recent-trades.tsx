@@ -23,10 +23,11 @@ export function RecentTrades({ trades, className }: RecentTradesProps) {
       <CardContent className="p-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-gray-800">Recent Trades</h3>
-          <Link href="/trades">
-            <a className="text-blue-500 text-sm font-medium hover:text-blue-700">
-              View All Trades
-            </a>
+          <Link 
+            href="/trades" 
+            className="text-blue-500 text-sm font-medium hover:text-blue-700"
+          >
+            View All Trades
           </Link>
         </div>
         <div className="overflow-x-auto">
