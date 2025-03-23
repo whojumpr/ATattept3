@@ -26,17 +26,16 @@ interface NavItemProps {
 
 const NavItem = ({ href, icon, label, isActive, onClick }: NavItemProps) => {
   return (
-    <Link href={href}>
-      <a
-        className={cn(
-          "flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors",
-          isActive && "bg-gray-700"
-        )}
-        onClick={onClick}
-      >
-        {icon}
-        <span>{label}</span>
-      </a>
+    <Link 
+      href={href}
+      onClick={onClick}
+      className={cn(
+        "flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors",
+        isActive && "bg-gray-700"
+      )}
+    >
+      {icon}
+      <span>{label}</span>
     </Link>
   );
 };

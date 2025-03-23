@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DatePicker } from "@/components/ui/date-picker";
 import { UploadCloud } from "lucide-react";
@@ -147,6 +147,9 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
           <DialogTitle>
             {editTrade ? "Edit Trade" : "Add New Trade"}
           </DialogTitle>
+          <DialogDescription>
+            {editTrade ? "Update the details of your trade." : "Enter the details of your trade."}
+          </DialogDescription>
         </DialogHeader>
         
         <Form {...form}>
