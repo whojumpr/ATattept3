@@ -349,8 +349,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// For local development, if not being imported
-if (require.main === module) {
+// This is only for local development, Vercel will use the default export
+if (typeof require !== 'undefined' && require.main === module) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
