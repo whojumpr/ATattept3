@@ -77,16 +77,16 @@ export default function AuthPage() {
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
               <BarChart3 className="h-8 w-8 text-green-600" />
             </div>
-            <CardTitle className="text-2xl font-bold">AlphaJournal</CardTitle>
+            <CardTitle className="text-2xl font-bold text-green-600">AlphaJournal</CardTitle>
             <CardDescription>
               Your complete day trading journal solution
             </CardDescription>
           </CardHeader>
           
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Register</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-green-100">
+              <TabsTrigger value="login" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">Login</TabsTrigger>
+              <TabsTrigger value="register" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">Register</TabsTrigger>
             </TabsList>
             
             <TabsContent value="login">
