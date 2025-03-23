@@ -14,9 +14,9 @@
     { "src": "/api/journal(.*)", "dest": "/api/server.js" },
     { "src": "/api/metrics(.*)", "dest": "/api/server.js" },
     { "src": "/api/(.*)", "dest": "/api/fallback.js" },
-    { "src": "^/$", "dest": "/index.html" },
-    { "src": "^/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "^/(.*)", "dest": "/index.html" }
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html", "status": 200 }
   ],
   "env": {
     "NODE_ENV": "production"
