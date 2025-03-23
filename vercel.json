@@ -4,16 +4,56 @@
     {
       "src": "package.json",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     { 
+      "src": "/api/healthcheck", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/user", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/login", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/logout", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/register", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/trades(.*)", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/journal(.*)", 
+      "dest": "/api/server.js" 
+    },
+    { 
+      "src": "/api/metrics(.*)", 
+      "dest": "/api/server.js" 
+    },
+    { 
       "src": "/api/(.*)", 
-      "dest": "dist/index.js" 
+      "dest": "/api/fallback.js" 
+    },
+    { 
+      "src": "/(.*\\.(js|css|png|jpg|svg|ico|json))",
+      "dest": "/dist/public/$1"
     },
     { 
       "src": "/(.*)", 
-      "dest": "/dist/public/$1" 
+      "dest": "/dist/public/index.html" 
     }
   ],
   "env": {
