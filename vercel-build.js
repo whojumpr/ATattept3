@@ -10,30 +10,25 @@ try {
   console.log('Building frontend with Vite...');
   execSync('vite build', { stdio: 'inherit' });
 
-  // Build the server without the --packages=external flag
-  console.log('Building server with esbuild...');
-  execSync('esbuild server/index.ts --platform=node --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
+  // Instead of building server/index.ts which has external dependency issues,
+  // we'll use our serverless API files directly
+  console.log('Skipping server build due to external dependency issues in Vercel...');
+  console.log('Using serverless API routes instead');
   
-  // Ensure we have the needed directories
-  if (!fs.existsSync('.vercel/output')) {
-    fs.mkdirSync('.vercel/output', { recursive: true });
+  // Create a placeholder dist/index.js file to satisfy the build process
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist', { recursive: true });
   }
   
-  if (!fs.existsSync('.vercel/output/functions')) {
-    fs.mkdirSync('.vercel/output/functions', { recursive: true });
-  }
-  
-  // Make sure our API directory is ready for Vercel
-  if (!fs.existsSync('.vercel/output/static')) {
-    fs.mkdirSync('.vercel/output/static', { recursive: true });
-  }
-
-  console.log('Copying files to Vercel output directory...');
-  
-  // Copy the static assets
-  execSync('cp -r dist/* .vercel/output/static/', { stdio: 'inherit' });
+  fs.writeFileSync('dist/index.js', `
+    // This is a placeholder file for Vercel deployment
+    // The actual server functionality is handled by the API routes
+    console.log('AlphaJournal API server - Vercel deployment');
+    export default {};
+  `);
   
   console.log('Build completed successfully!');
+  console.log('IMPORTANT: Remember to set SESSION_SECRET environment variable in Vercel.');
 } catch (error) {
   console.error('Build failed with error:', error);
   process.exit(1);

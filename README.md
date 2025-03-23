@@ -29,7 +29,7 @@ This project is configured for seamless deployment to Vercel. Follow these steps
 3. Use the following deployment settings:
    - **Framework Preset**: Vite
    - **Root Directory**: `.` (root of the repository)
-   - **Build Command**: `npm run build`
+   - **Build Command**: `node vercel-build.js`
    - **Output Directory**: `dist`
    - **Install Command**: `npm install`
 
@@ -40,14 +40,24 @@ For proper functionality, set these environment variables in your Vercel project
 - `NODE_ENV`: Set to `production`
 - `SESSION_SECRET`: A strong random string for securing session cookies
 
+### Handling the External Module Error
+
+If you encounter the error: `The entry point "server/index.ts" cannot be marked as external`, the custom build script (`vercel-build.js`) should handle this by:
+
+1. Building only the frontend using Vite
+2. Creating a placeholder server file 
+3. Using the serverless API routes in the `api` directory for backend functionality
+
+The `vercel.json` file contains proper routing configuration to direct API requests to the appropriate serverless functions.
+
 ### Deployment Troubleshooting
 
 If you encounter issues during deployment:
 
 1. Ensure all environment variables are properly set in the Vercel dashboard
 2. Check Vercel's function logs for any API-related errors
-3. Verify that the build was completed successfully
-4. Make sure Vercel's routing configuration isn't blocking API requests
+3. Verify that the custom build script ran completely
+4. Remember that a demo user (username: `demo`, password: `demo123`) is automatically created for testing
 
 ## Development
 

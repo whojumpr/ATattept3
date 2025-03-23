@@ -3,22 +3,19 @@
   "framework": "vite",
   "buildCommand": "node vercel-build.js",
   "outputDirectory": "dist",
-  "functions": {
-    "api/**/*.js": {
-      "includeFiles": "dist/**"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/verify", "destination": "/api/verify" },
-    { "source": "/api/healthcheck", "destination": "/api/server" },
-    { "source": "/api/user", "destination": "/api/server" },
-    { "source": "/api/login", "destination": "/api/server" },
-    { "source": "/api/logout", "destination": "/api/server" },
-    { "source": "/api/register", "destination": "/api/server" },
-    { "source": "/api/trades/:path*", "destination": "/api/server" },
-    { "source": "/api/journal/:path*", "destination": "/api/server" },
-    { "source": "/api/metrics/:path*", "destination": "/api/server" },
-    { "source": "/api/:path*", "destination": "/api/fallback" }
+  "installCommand": "npm install",
+  "routes": [
+    { "src": "/api/verify", "dest": "/api/verify.js" },
+    { "src": "/api/healthcheck", "dest": "/api/server.js" },
+    { "src": "/api/user", "dest": "/api/server.js" },
+    { "src": "/api/login", "dest": "/api/server.js" },
+    { "src": "/api/logout", "dest": "/api/server.js" },
+    { "src": "/api/register", "dest": "/api/server.js" },
+    { "src": "/api/trades(.*)", "dest": "/api/server.js" },
+    { "src": "/api/journal(.*)", "dest": "/api/server.js" },
+    { "src": "/api/metrics(.*)", "dest": "/api/server.js" },
+    { "src": "/api/(.*)", "dest": "/api/fallback.js" },
+    { "src": "/(.*)", "dest": "/$1" }
   ],
   "env": {
     "NODE_ENV": "production"
