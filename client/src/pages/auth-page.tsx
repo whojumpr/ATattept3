@@ -74,7 +74,7 @@ export default function AuthPage() {
       <div className="flex-1 flex items-center justify-center p-4 md:p-8">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
               <BarChart3 className="h-8 w-8 text-green-600" />
             </div>
             <CardTitle className="text-2xl font-bold">AlphaJournal</CardTitle>
@@ -205,41 +205,41 @@ export default function AuthPage() {
       </div>
       
       {/* Hero Column */}
-      <div className="hidden md:flex flex-1 bg-blue-600 text-white flex-col justify-center p-12">
+      <div className="hidden md:flex flex-1 bg-green-600 text-white flex-col justify-center p-12">
         <div className="max-w-md">
           <h1 className="text-4xl font-bold mb-4">Track, Analyze, Improve</h1>
           <p className="text-lg mb-8">
-            TradeTrak helps you record your trades, analyze your performance, and become a more profitable trader through detailed insights and metrics.
+            AlphaJournal helps you record your trades, analyze your performance, and become a more profitable trader through detailed insights and metrics.
           </p>
           
           <div className="space-y-6">
             <div className="flex items-start gap-3">
-              <div className="bg-blue-500 p-2 rounded-full mt-1">
+              <div className="bg-green-500 p-2 rounded-full mt-1">
                 <ChevronRight className="h-4 w-4" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Comprehensive Trade Journal</h3>
-                <p className="text-blue-100">Log all your trades with detailed information and screenshots.</p>
+                <p className="text-green-100">Log all your trades with detailed information and screenshots.</p>
               </div>
             </div>
             
             <div className="flex items-start gap-3">
-              <div className="bg-blue-500 p-2 rounded-full mt-1">
+              <div className="bg-green-500 p-2 rounded-full mt-1">
                 <ChevronRight className="h-4 w-4" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Advanced Analytics</h3>
-                <p className="text-blue-100">Visualize your performance with detailed charts and metrics.</p>
+                <p className="text-green-100">Visualize your performance with detailed charts and metrics.</p>
               </div>
             </div>
             
             <div className="flex items-start gap-3">
-              <div className="bg-blue-500 p-2 rounded-full mt-1">
+              <div className="bg-green-500 p-2 rounded-full mt-1">
                 <ChevronRight className="h-4 w-4" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Trading Journal</h3>
-                <p className="text-blue-100">Document your thoughts, strategies, and market observations.</p>
+                <p className="text-green-100">Document your thoughts, strategies, and market observations.</p>
               </div>
             </div>
           </div>
