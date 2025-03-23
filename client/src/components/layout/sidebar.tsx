@@ -72,8 +72,8 @@ export function Sidebar() {
       {/* Mobile header bar */}
       <div className="md:hidden bg-gray-800 text-white p-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <BarChart3 className="h-8 w-8 text-blue-500" />
-          <h1 className="text-xl font-bold">TradeTrak</h1>
+          <BarChart3 className="h-8 w-8 text-green-500" />
+          <h1 className="text-xl font-bold">AlphaJournal</h1>
         </div>
         <Button
           variant="ghost"
@@ -98,8 +98,8 @@ export function Sidebar() {
       >
         <div className="p-4 flex items-center justify-between md:justify-center">
           <div className="flex items-center space-x-2">
-            <BarChart3 className="h-8 w-8 text-blue-500" />
-            <h1 className="text-xl font-bold">TradeTrak</h1>
+            <BarChart3 className="h-8 w-8 text-green-500" />
+            <h1 className="text-xl font-bold">AlphaJournal</h1>
           </div>
           <Button
             variant="ghost"

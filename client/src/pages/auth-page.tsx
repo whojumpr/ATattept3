@@ -75,9 +75,9 @@ export default function AuthPage() {
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-              <BarChart3 className="h-8 w-8 text-blue-600" />
+              <BarChart3 className="h-8 w-8 text-green-600" />
             </div>
-            <CardTitle className="text-2xl font-bold">TradeTrak</CardTitle>
+            <CardTitle className="text-2xl font-bold">AlphaJournal</CardTitle>
             <CardDescription>
               Your complete day trading journal solution
             </CardDescription>
