@@ -30,11 +30,11 @@ const NavItem = ({ href, icon, label, isActive, onClick }: NavItemProps) => {
       href={href}
       onClick={onClick}
       className={cn(
-        "flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors",
-        isActive && "bg-gray-700"
+        "flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-green-600/20 transition-colors",
+        isActive && "bg-green-600/20 text-green-500 font-medium"
       )}
     >
-      {icon}
+      <span className={cn(isActive && "text-green-500")}>{icon}</span>
       <span>{label}</span>
     </Link>
   );
@@ -161,7 +161,7 @@ export function Sidebar() {
         <div className="mt-auto p-4 border-t border-gray-700">
           <div className="flex items-center space-x-3">
             <Avatar>
-              <AvatarFallback className="bg-gray-600 text-white">
+              <AvatarFallback className="bg-green-600 text-white">
                 {getInitials(user?.name || user?.username)}
               </AvatarFallback>
             </Avatar>
@@ -173,7 +173,7 @@ export function Sidebar() {
               variant="ghost"
               size="icon"
               onClick={handleLogout}
-              className="ml-auto text-gray-400 hover:text-white hover:bg-gray-700"
+              className="ml-auto text-gray-400 hover:text-green-500 hover:bg-green-600/20"
               title="Logout"
             >
               <LogOut className="h-5 w-5" />

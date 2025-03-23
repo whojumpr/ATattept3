@@ -452,7 +452,7 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
                       <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                         <UploadCloud className="mx-auto h-12 w-12 text-gray-400" />
                         <p className="mt-1 text-sm text-gray-500">
-                          Drag and drop your files here, or <span className="text-blue-500">browse</span>
+                          Drag and drop your files here, or <span className="text-green-500">browse</span>
                         </p>
                         <p className="mt-1 text-xs text-gray-400">
                           Supports: JPG, PNG, GIF (Max 5MB each)
@@ -477,6 +477,7 @@ export function TradeEntryForm({ isOpen, onClose, editTrade }: TradeEntryFormPro
               <Button 
                 type="submit"
                 disabled={tradeMutation.isPending}
+                className="bg-green-600 hover:bg-green-700 text-white"
               >
                 {tradeMutation.isPending 
                   ? "Saving..." 
