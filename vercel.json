@@ -14,7 +14,9 @@
     { "src": "/api/journal(.*)", "dest": "/api/server.js" },
     { "src": "/api/metrics(.*)", "dest": "/api/server.js" },
     { "src": "/api/(.*)", "dest": "/api/fallback.js" },
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "^/$", "dest": "/index.html" },
+    { "src": "^/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "^/(.*)", "dest": "/index.html" }
   ],
   "env": {
     "NODE_ENV": "production"
