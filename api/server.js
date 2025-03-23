@@ -465,4 +465,8 @@ if (typeof require !== 'undefined' && require.main === module) {
   }
 })();
 
-export default app;
+// Create a serverless handler for Vercel
+export default function handler(req, res) {
+  // Pass the request to our Express app
+  return app(req, res);
+}
